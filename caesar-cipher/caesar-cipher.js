@@ -7,8 +7,10 @@ function caesarCipher(string, shift, mode) {
 
   // Normalizes shift allowing negative or large numbers to be used.
   const effectiveShift = ((shift % 26) + 26) % 26;
+  
+  const strippedMode = mode === 'stripped' ? true : false;
 
-  // Returns string if shift is effectively zero.
+  // Returns string unmodified if shift is effectively zero.
   if (effectiveShift === 0) return string;
 
   const plaintextAlphabetLower = "abcdefghijklmnopqrstuvwxyz";
@@ -35,13 +37,13 @@ function caesarCipher(string, shift, mode) {
         encryptedMessage += cipherAlphabetUpper[index];
       } else {
         // Not a letter
-        if (mode !== 'secure') {
+        if (!strippedMode) {
           encryptedMessage += char;
         }
       }
     }
   }
-  if(mode !== 'secure'){
+  if (!strippedMode) {
     return encryptedMessage;
   } else {
     return encryptedMessage.toLowerCase();
