@@ -1,4 +1,4 @@
-function caesarCipher(string, shift) {
+function caesarCipher(string, shift, mode) {
   // Error if a string or invalid number is entered
   if (typeof string !== "string")
     throw new Error("Element to be encoded must be a string.");
@@ -35,11 +35,17 @@ function caesarCipher(string, shift) {
         encryptedMessage += cipherAlphabetUpper[index];
       } else {
         // Not a letter
-        encryptedMessage += char;
+        if (mode !== 'secure') {
+          encryptedMessage += char;
+        }
       }
     }
   }
-  return encryptedMessage;
+  if(mode !== 'secure'){
+    return encryptedMessage;
+  } else {
+    return encryptedMessage.toLowerCase();
+  }
 }
 
 const generateCipherAlphabet = (shift, alphabet) => {

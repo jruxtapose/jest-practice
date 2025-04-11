@@ -11,3 +11,12 @@ test("cipher respects capitalization", () => {
 test("cipher leaves punctuation alone", () => {
   expect(caesarCipher("Hello, World!", 3)).toMatch(/Khoor, Zruog!/);
 });
+
+test('cipher accepts negative and large numbers', () => {
+    expect(caesarCipher('Hello World', 28)).toMatch(/Jgnnq Yqtnf/)
+    expect(caesarCipher('Hello World', -1)).toMatch(/Gdkkn Vnqkc/)
+})
+
+test('secure mode remove capitalization, punctuation, and spaces.', () => {
+    expect(caesarCipher('Hello World', 28, 'secure')).toMatch(/jgnnqyqtnf/)
+})
